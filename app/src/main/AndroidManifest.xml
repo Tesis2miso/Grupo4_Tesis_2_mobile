@@ -4,6 +4,7 @@
     package="com.example.dermoapp">
 
     <application
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:usesCleartextTraffic="false"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
