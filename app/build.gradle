@@ -32,6 +32,12 @@ android {
     viewBinding {
         enabled = true
     }
+
+    task generateVersionTxt {
+        doLast {
+            file("./version.txt").text = android.defaultConfig.versionName
+        }
+    }
 }
 
 dependencies {
