@@ -15,4 +15,7 @@
     <string name="signup_terms">Al continuar acepta los terminos y condiciones</string>
     <string name="empty_field">Campo no puede estar vacio</string>
     <string name="password_confirmation_does_not_match">Confirmación de contraseña no coincide</string>
+    <string name="network_error">Hubo un error, verifique su conexión por favor</string>
+    <string name="ok">OK</string>
+    <string name="error">Error</string>
 </resources>

@@ -1,5 +1,8 @@
 package com.example.dermoapp.views
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -11,12 +14,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.dermoapp.R
 import com.example.dermoapp.databinding.ActivitySignupBinding
 import com.example.dermoapp.models.User
-import com.example.dermoapp.view_models.SignupViewModel
-import com.example.dermoapp.view_models.SignupViewModelFactory
+import com.example.dermoapp.utils.SharedPreferencesManager
+import com.example.dermoapp.viewmodels.SignupViewModel
+import com.example.dermoapp.viewmodels.SignupViewModelFactory
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
@@ -42,7 +47,7 @@ class SignupActivity : AppCompatActivity() {
         "Barranquilla", "Cartagena", "Bucaramanga",
         "Pereira", "Manizales"
     )
-    private val viewModel: SignupViewModel by viewModels { SignupViewModelFactory() }
+    private val viewModel: SignupViewModel by viewModels { SignupViewModelFactory(this.application) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,10 +75,9 @@ class SignupActivity : AppCompatActivity() {
         datePicker.addOnPositiveButtonClickListener(MaterialPickerOnPositiveButtonClickListener<Long?> { selection ->
             val timeZoneUTC = TimeZone.getDefault()
             val offsetFromUTC = timeZoneUTC.getOffset(Date().time) * -1
-            val simpleFormat = SimpleDateFormat("MM/dd/yyyy", Locale.US)
             val date = Date(selection + offsetFromUTC)
             selectedDate = date
-            birthdayInput.setText(simpleFormat.format(date))
+            birthdayInput.setText(dateToSring(date))
         })
 
         birthdayInput.setOnClickListener {
@@ -89,6 +93,12 @@ class SignupActivity : AppCompatActivity() {
                 progressIndicator.visibility = View.GONE
                 formSignup.visibility = View.VISIBLE
                 btnSignup.visibility = View.VISIBLE
+            }
+        }
+
+        viewModel.errorMssg.observe(this) { mssg ->
+            if(mssg != null) {
+                openDialog(mssg)
             }
         }
     }
@@ -126,12 +136,17 @@ class SignupActivity : AppCompatActivity() {
         passwordConfirmationInput.error = null
     }
 
+    private fun dateToSring(dateToFormat: Date): String {
+        val simpleFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+        return simpleFormat.format(dateToFormat)
+    }
+
     private fun submitForm() {
         clearErrors()
-        val user = User(
+        var user = User(
             nameInput.text.toString(),
             emailInput.text.toString(),
-            selectedDate,
+            if(selectedDate == null) null else dateToSring(selectedDate!!),
             cityInput.text.toString(),
             phoneInput.text.toString(),
             passwordInput.text.toString(),
@@ -147,7 +162,7 @@ class SignupActivity : AppCompatActivity() {
             emailInput.error = getString(R.string.empty_field)
             error = true
         }
-        if(user.date == null) {
+        if(user.birth_day == null) {
             birthdayInput.error = getString(R.string.empty_field)
             error = true
         }
@@ -168,7 +183,29 @@ class SignupActivity : AppCompatActivity() {
             error = true
         }
         if(!error) {
-            viewModel.signUp(user)
+            viewModel.signUp(user) { user ->
+                onUserRegistered(user)
+            }
         }
+    }
+
+    private fun onUserRegistered(user: User) {
+        SharedPreferencesManager(this).saveStringPreference(
+            SharedPreferencesManager.USER_TOKEN,
+            user.token!!
+        )
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
+        this.finish()
+    }
+
+    private fun openDialog(mssg: String) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.error)
+            .setMessage(mssg)
+            .setNeutralButton(R.string.ok) { _, _ ->
+                viewModel.clearError()
+            }.show()
     }
 }
