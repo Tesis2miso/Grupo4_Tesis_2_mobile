@@ -4,16 +4,19 @@
     package="com.example.dermoapp">
 
     <application
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:usesCleartextTraffic="false"
         android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DermoApp"
-        tools:targetApi="s"
-        tools:ignore="DataExtractionRules">
+        android:usesCleartextTraffic="false"
+        tools:ignore="DataExtractionRules"
+        tools:targetApi="s">
+        <activity
+            android:name=".views.SignupActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

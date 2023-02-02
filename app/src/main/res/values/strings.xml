@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">DermoApp</string>
+    <string name="main_description">Somo la plataforma que trae la dermatologia mas cerca de ti</string>
+    <string name="main_signup_btn">Registrarse</string>
+    <string name="main_login_btn">Iniciar sesión</string>
+    <string name="main_image_description">Girl in a dermatologic procedure</string>
+    <string name="form_signup_name">Nombre</string>
+    <string name="form_signup_email">Email</string>
+    <string name="form_signup_birth_day">Fecha de nacimiento</string>
+    <string name="form_signup_city">Ciudad</string>
+    <string name="form_signup_phone">Celular</string>
+    <string name="form_signup_password">Contraseña</string>
+    <string name="form_signup_confirm_password">Confirmación de contraseña</string>
+    <string name="signup_btn_signup">Registrar</string>
+    <string name="signup_terms">Al continuar acepta los terminos y condiciones</string>
+    <string name="empty_field">Campo no puede estar vacio</string>
+    <string name="password_confirmation_does_not_match">Confirmación de contraseña no coincide</string>
 </resources>
