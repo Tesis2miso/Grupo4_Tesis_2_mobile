@@ -90,6 +90,7 @@
                 android:hint="@string/form_signup_city">
 
                 <AutoCompleteTextView
+                    android:hint="@string/form_signup_city"
                     android:id="@+id/cityInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

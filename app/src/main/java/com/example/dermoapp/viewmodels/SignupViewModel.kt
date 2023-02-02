@@ -1,13 +1,10 @@
 package com.example.dermoapp.viewmodels
 
 import android.app.Application
-import android.content.Intent
 import androidx.lifecycle.*
 import com.example.dermoapp.R
 import com.example.dermoapp.models.User
 import com.example.dermoapp.repositories.UserRepository
-import com.example.dermoapp.views.SignupActivity
-import kotlinx.coroutines.launch
 
 
 class SignupViewModel(val application: Application): ViewModel() {
@@ -27,8 +24,8 @@ class SignupViewModel(val application: Application): ViewModel() {
 
     fun signUp(user: User, onSuccess: (user: User) -> Unit) {
         setLoading(true)
-        UserRepository.createUser(user, { new_user ->
-            onSuccess(new_user)
+        UserRepository.createUser(user, { newUser ->
+            onSuccess(newUser)
         }, { error -> _errorMssg.value = error.mssg
            }, { _errorMssg.value = application.resources.getString(R.string.network_error)
         }, { setLoading(false)

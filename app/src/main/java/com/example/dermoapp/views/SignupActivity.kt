@@ -1,8 +1,6 @@
 package com.example.dermoapp.views
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -162,7 +160,7 @@ class SignupActivity : AppCompatActivity() {
             emailInput.error = getString(R.string.empty_field)
             error = true
         }
-        if(user.birth_day == null) {
+        if(user.birthDay == null) {
             birthdayInput.error = getString(R.string.empty_field)
             error = true
         }
