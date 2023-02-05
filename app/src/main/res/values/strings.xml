@@ -18,4 +18,7 @@
     <string name="network_error">Hubo un error, verifique su conexión por favor</string>
     <string name="ok">OK</string>
     <string name="error">Error</string>
+    <string name="form_login_email">Email</string>
+    <string name="form_login_password">Contraseña</string>
+    <string name="login_btn_login">Ingresar</string>
 </resources>
