@@ -1,7 +1,9 @@
 package com.example.dermoapp.repositories
 
 import com.example.dermoapp.daos.UserDAO
+import com.example.dermoapp.daos.UserLoginDAO
 import com.example.dermoapp.models.User
+import com.example.dermoapp.models.UserLogin
 import com.example.dermoapp.restservices.UsersAPI
 import com.example.dermoapp.utils.ApiError
 import com.google.gson.Gson
@@ -31,6 +33,28 @@ object UserRepository: Repository() {
             }
 
             override fun onFailure(call: Call<UserDAO>, t: Throwable) {
+                onNetworkError()
+                onResponse()
+            }
+        })
+    }
+
+    fun loginUser(userLogin: UserLogin, onSuccess: (userLogin: UserLogin) -> Unit, onFailure: (error: ApiError) -> Unit, onNetworkError: () -> Unit, onResponse: () -> Unit) {
+        service.login(userLogin).enqueue(object: Callback<UserLoginDAO> {
+            override fun onResponse(call: Call<UserLoginDAO>, response: Response<UserLoginDAO>) {
+                if(response.isSuccessful) {
+                    onSuccess(response.body()!!.toUserLogin())
+                } else {
+                    val apiError: ApiError = Gson().fromJson(
+                        response.errorBody()!!.charStream(),
+                        ApiError::class.java
+                    )
+                    onFailure(apiError)
+                }
+                onResponse()
+            }
+
+            override fun onFailure(call: Call<UserLoginDAO>, t: Throwable) {
                 onNetworkError()
                 onResponse()
             }

@@ -16,7 +16,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnLogin.setOnClickListener {
-
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
 
         binding.btnSignup.setOnClickListener {
