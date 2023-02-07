@@ -62,6 +62,19 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/form_space"/>
+
+            <Button
+                android:id="@+id/btnForgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/btn_forgot_password"
+                android:textColor="@color/light_blue"
+                android:backgroundTint="@color/white"
+                />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/form_space"/>
         </LinearLayout>
     </ScrollView>
 

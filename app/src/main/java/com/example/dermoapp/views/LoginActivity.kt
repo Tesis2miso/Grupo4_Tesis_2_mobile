@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.ScrollView
@@ -145,7 +144,14 @@ class LoginActivity : AppCompatActivity() {
             SharedPreferencesManager.USER_TOKEN,
             userLogin.token!!
         )
+        val email = emailInput.text.toString()
+        SharedPreferencesManager(this).saveStringPreference(
+            SharedPreferencesManager.USER_EMAIL,
+            email
+        )
+
         val intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("user_email", email)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
         this.finish()

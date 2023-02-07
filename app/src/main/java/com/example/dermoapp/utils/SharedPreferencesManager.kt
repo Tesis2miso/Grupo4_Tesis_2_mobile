@@ -7,6 +7,7 @@ class SharedPreferencesManager(val context: Context) {
     companion object {
         val USER_TOKEN: String = "USER_TOKEN"
         val PREFERENCES: String = "PREFERENCES"
+        val USER_EMAIL: String = "USER_EMAIL"
     }
 
     fun getStringPreference(key: String): String? {
