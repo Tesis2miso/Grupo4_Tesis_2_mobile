@@ -2,6 +2,8 @@ package com.example.dermoapp.views
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -22,6 +24,7 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,6 +37,8 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var phoneInput: TextInputEditText
     private lateinit var passwordInput: TextInputEditText
     private lateinit var passwordConfirmationInput: TextInputEditText
+    private lateinit var passwordInputLayout: TextInputLayout
+    private lateinit var passwordInputConfirmationLayout: TextInputLayout
     private lateinit var birthdayInput: TextInputEditText
     private lateinit var datePicker: MaterialDatePicker<Long>
     private lateinit var btnSignup: Button
@@ -59,6 +64,8 @@ class SignupActivity : AppCompatActivity() {
         phoneInput = binding.phoneInput
         passwordInput = binding.passwordInput
         passwordConfirmationInput = binding.passwordConfirmationInput
+        passwordInputLayout = binding.passwordInputSignupLayout
+        passwordInputConfirmationLayout = binding.passwordInputSignupConfirmationLayout
         birthdayInput = binding.birthdayInput
         btnSignup = binding.btnSignup
         progressIndicator = binding.progressIndicator
@@ -99,6 +106,52 @@ class SignupActivity : AppCompatActivity() {
                 openDialog(mssg)
             }
         }
+
+        passwordInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                if(hasCapsOn(passwordInput.text)) {
+                    passwordInputLayout.helperText = getString(R.string.mayus_field)
+                } else {
+                    passwordInputLayout.helperText = ""
+                }
+            }
+        })
+
+        passwordConfirmationInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+
+                if(hasCapsOn(passwordConfirmationInput.text)) {
+                    passwordInputConfirmationLayout.helperText = getString(R.string.mayus_field)
+                } else {
+                    passwordInputConfirmationLayout.helperText = ""
+                }
+            }
+        })
+    }
+
+    fun hasCapsOn(text: Editable?): Boolean{
+        if (text == null){
+            return false
+        }
+        if(text.isNotEmpty()){
+            return text.last().isUpperCase()
+        }
+        return false
     }
 
     override fun onSupportNavigateUp(): Boolean {
