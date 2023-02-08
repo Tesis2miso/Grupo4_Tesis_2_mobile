@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DermoApp</string>
+    <string name="main_description">We are the platform that brings dermatology closer to you</string>
+    <string name="main_signup_btn">Signup</string>
+    <string name="main_login_btn">Login</string>
+    <string name="main_image_description">Girl in a dermatologic procedure</string>
+    <string name="form_signup_name">Name</string>
+    <string name="form_signup_email">Email</string>
+    <string name="form_signup_birth_day">Birthday</string>
+    <string name="form_signup_city">City</string>
+    <string name="form_signup_phone">Phone</string>
+    <string name="form_signup_password">Password</string>
+    <string name="form_signup_confirm_password">Password confirmation</string>
+    <string name="signup_btn_signup">Signup</string>
+    <string name="signup_terms">By continuing you accept the terms and conditions</string>
+    <string name="empty_field">Field cannot be empty</string>
+    <string name="password_confirmation_does_not_match">Password confirmation does not match</string>
+    <string name="network_error">There was an error, please check your connection</string>
+    <string name="ok">OK</string>
+    <string name="error">Error</string>
+    <string name="form_login_email">Email</string>
+    <string name="form_login_password">Password</string>
+    <string name="login_btn_login">Login</string>
+</resources>

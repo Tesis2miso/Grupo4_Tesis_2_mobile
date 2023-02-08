@@ -3,7 +3,7 @@
     <string name="main_description">Somo la plataforma que trae la dermatologia mas cerca de ti</string>
     <string name="main_signup_btn">Registrarse</string>
     <string name="main_login_btn">Iniciar sesión</string>
-    <string name="main_image_description">Girl in a dermatologic procedure</string>
+    <string name="main_image_description">Chica en un procedimiento dermatológico</string>
     <string name="form_signup_name">Nombre</string>
     <string name="form_signup_email">Email</string>
     <string name="form_signup_birth_day">Fecha de nacimiento</string>
