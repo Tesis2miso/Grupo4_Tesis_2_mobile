@@ -108,10 +108,13 @@ class SignupActivity : AppCompatActivity() {
         }
 
         passwordInput.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
+            override fun afterTextChanged(s: Editable) {
+                // No need to override anything here
+            }
 
             override fun beforeTextChanged(s: CharSequence, start: Int,
                                            count: Int, after: Int) {
+                // No need to override anything here
             }
 
             override fun onTextChanged(s: CharSequence, start: Int,
@@ -126,10 +129,12 @@ class SignupActivity : AppCompatActivity() {
 
         passwordConfirmationInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
+                // No need to override anything here
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int,
                                            count: Int, after: Int) {
+                // No need to override anything here
             }
 
             override fun onTextChanged(s: CharSequence, start: Int,

@@ -26,6 +26,11 @@ class HomeActivity : AppCompatActivity() {
             name = ", " + email.first()
         }
 
-        homeTextView.text = getString(R.string.hello_field) + name
+        homeTextView.text = getTextHome(name)
     }
+
+    fun getTextHome(name: String): String{
+        return getString(R.string.hello_field) + name
+    }
+
 }
