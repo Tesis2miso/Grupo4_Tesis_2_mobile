@@ -124,6 +124,8 @@
                 android:layout_height="@dimen/form_space"/>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordInputSignupLayout"
+                app:helperText=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/form_signup_password"
@@ -144,6 +146,8 @@
                 android:layout_height="@dimen/form_space"/>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordInputSignupConfirmationLayout"
+                app:helperText=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"

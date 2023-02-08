@@ -33,8 +33,13 @@ class MainActivity : AppCompatActivity() {
             SharedPreferencesManager.USER_TOKEN
         )
 
-        if(token != null) {
+        val email: String? = SharedPreferencesManager(this).getStringPreference(
+            SharedPreferencesManager.USER_EMAIL
+        )
+
+        if(token != null && email != null) {
             val intent = Intent(this, HomeActivity::class.java)
+            intent.putExtra("user_email", email)
             startActivity(intent)
             this.finish()
         }

@@ -22,4 +22,7 @@
     <string name="form_login_email">Email</string>
     <string name="form_login_password">Password</string>
     <string name="login_btn_login">Login</string>
+    <string name="mayus_field">Mayus activated</string>
+    <string name="hello_field">Hello</string>
+    <string name="btn_forgot_password">Forgot your password?</string>
 </resources>

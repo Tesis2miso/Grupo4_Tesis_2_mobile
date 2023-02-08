@@ -14,6 +14,8 @@
     <string name="signup_btn_signup">Registrar</string>
     <string name="signup_terms">Al continuar acepta los terminos y condiciones</string>
     <string name="empty_field">Campo no puede estar vacio</string>
+    <string name="mayus_field">Mayusculas activas</string>
+    <string name="hello_field">Hola</string>
     <string name="password_confirmation_does_not_match">Confirmación de contraseña no coincide</string>
     <string name="network_error">Hubo un error, verifique su conexión por favor</string>
     <string name="ok">OK</string>
@@ -21,4 +23,5 @@
     <string name="form_login_email">Email</string>
     <string name="form_login_password">Contraseña</string>
     <string name="login_btn_login">Ingresar</string>
+    <string name="btn_forgot_password">¿Olvidaste la contraseña?</string>
 </resources>
