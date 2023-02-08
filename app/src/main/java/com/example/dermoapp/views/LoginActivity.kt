@@ -9,9 +9,11 @@ import android.widget.Button
 import android.widget.ScrollView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import com.example.dermoapp.R
 import com.example.dermoapp.databinding.ActivityLoginBinding
 import com.example.dermoapp.models.UserLogin
+import com.example.dermoapp.utils.CapsUtil
 import com.example.dermoapp.utils.SharedPreferencesManager
 import com.example.dermoapp.viewmodels.LoginViewModel
 import com.example.dermoapp.viewmodels.LoginViewModelFactory
@@ -25,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var emailInput: TextInputEditText
     private lateinit var passwordInput: TextInputEditText
-    private lateinit var passwordInputLayout: TextInputLayout
+    private lateinit var passwordInputLayoutLogin: TextInputLayout
     private lateinit var btnLogin: Button
     private lateinit var progressIndicator: CircularProgressIndicator
     private lateinit var formLogin: ScrollView
@@ -40,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         emailInput = binding.emailInputLogin
         passwordInput = binding.passwordInputLogin
-        passwordInputLayout = binding.passwordInputLoginLayout
+        passwordInputLayoutLogin = binding.passwordInputLoginLayout
         btnLogin = binding.btnLogin
         progressIndicator = binding.progressIndicator
         formLogin = binding.formLogin
@@ -65,27 +67,15 @@ class LoginActivity : AppCompatActivity() {
                 openDialog(mssg)
             }
         }
+        val caps = CapsUtil()
 
-        passwordInput.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable) {
-                // No need to override anything here
+        passwordInput.doOnTextChanged { _, _, _, _ ->
+            if(caps.hasCapsOn(passwordInput.text)) {
+                passwordInputLayoutLogin.helperText = getString(R.string.mayus_field)
+            } else {
+                passwordInputLayoutLogin.helperText = ""
             }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-                // No need to override anything here
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
-                if(hasCapsOn(passwordInput.text)) {
-                    passwordInputLayout.helperText = getString(R.string.mayus_field)
-                } else {
-                    passwordInputLayout.helperText = ""
-                }
-            }
-        })
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -104,16 +94,6 @@ class LoginActivity : AppCompatActivity() {
     private fun clearErrors() {
         emailInput.error = null
         passwordInput.error = null
-    }
-
-    fun hasCapsOn(text: Editable?): Boolean{
-        if (text == null){
-            return false
-        }
-        if(text.isNotEmpty()){
-            return text.last().isUpperCase()
-        }
-        return false
     }
 
     private fun submitForm() {

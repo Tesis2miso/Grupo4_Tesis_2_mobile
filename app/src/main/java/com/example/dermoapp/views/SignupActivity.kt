@@ -11,9 +11,11 @@ import android.widget.Button
 import android.widget.ScrollView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import com.example.dermoapp.R
 import com.example.dermoapp.databinding.ActivitySignupBinding
 import com.example.dermoapp.models.User
+import com.example.dermoapp.utils.CapsUtil
 import com.example.dermoapp.utils.SharedPreferencesManager
 import com.example.dermoapp.viewmodels.SignupViewModel
 import com.example.dermoapp.viewmodels.SignupViewModelFactory
@@ -107,56 +109,24 @@ class SignupActivity : AppCompatActivity() {
             }
         }
 
-        passwordInput.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                // No need to override anything here
+        val caps = CapsUtil()
+
+        passwordInput.doOnTextChanged { _, _, _, _ ->
+            if(caps.hasCapsOn(passwordInput.text)) {
+                passwordInputLayout.helperText = getString(R.string.mayus_field)
+            } else {
+                passwordInputLayout.helperText = ""
             }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-                // No need to override anything here
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
-                if(hasCapsOn(passwordInput.text)) {
-                    passwordInputLayout.helperText = getString(R.string.mayus_field)
-                } else {
-                    passwordInputLayout.helperText = ""
-                }
-            }
-        })
-
-        passwordConfirmationInput.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                // No need to override anything here
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-                // No need to override anything here
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int,
-                                       before: Int, count: Int) {
-
-                if(hasCapsOn(passwordConfirmationInput.text)) {
-                    passwordInputConfirmationLayout.helperText = getString(R.string.mayus_field)
-                } else {
-                    passwordInputConfirmationLayout.helperText = ""
-                }
-            }
-        })
-    }
-
-    fun hasCapsOn(text: Editable?): Boolean{
-        if (text == null){
-            return false
         }
-        if(text.isNotEmpty()){
-            return text.last().isUpperCase()
+
+        passwordConfirmationInput.doOnTextChanged { _, _, _, _ ->
+            if(caps.hasCapsOn(passwordConfirmationInput.text)) {
+                passwordInputConfirmationLayout.helperText = getString(R.string.mayus_field)
+            } else {
+                passwordInputConfirmationLayout.helperText = ""
+            }
         }
-        return false
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
