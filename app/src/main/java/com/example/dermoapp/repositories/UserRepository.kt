@@ -19,50 +19,36 @@ object UserRepository: Repository() {
     private var service: UsersAPI = client.create(UsersAPI::class.java)
 
     fun createUser(user: User, onSuccess: (user: User) -> Unit, onFailure: (error: ApiError) -> Unit, onNetworkError: () -> Unit, onResponse: () -> Unit) {
-        service.create(user).enqueue(object: Callback<UserDAO> {
-            override fun onResponse(call: Call<UserDAO>, response: Response<UserDAO>) {
-                if(response.isSuccessful) {
-                    onSuccess(response.body()!!.toUser())
-                } else {
-                    onFailure(userRetrofitErrorToApiError(response))
-                }
-                onResponse()
-            }
-
-            override fun onFailure(call: Call<UserDAO>, t: Throwable) {
-                onNetworkError()
-                onResponse()
-            }
-        })
+        service.create(user).enqueue(
+            generateUserCallback(onSuccess, onFailure, onNetworkError, onResponse)
+        )
     }
 
     fun loginUser(userLogin: User, onSuccess: (userLogin: User) -> Unit, onFailure: (error: ApiError) -> Unit, onNetworkError: () -> Unit, onResponse: () -> Unit) {
-        service.login(userLogin).enqueue(object: Callback<UserDAO> {
-            override fun onResponse(call: Call<UserDAO>, response: Response<UserDAO>) {
-                if(response.isSuccessful) {
-                    onSuccess(response.body()!!.toUser())
-                } else {
-                    onFailure(userRetrofitErrorToApiError(response))
-                }
-                onResponse()
-            }
-
-            override fun onFailure(call: Call<UserDAO>, t: Throwable) {
-                onNetworkError()
-                onResponse()
-            }
-        })
+        service.login(userLogin).enqueue(
+            generateUserCallback(onSuccess, onFailure, onNetworkError, onResponse)
+        )
     }
 
     fun updateCity(context: Context, city: String, onSuccess: (user: User) -> Unit, onFailure: (error: ApiError) -> Unit, onNetworkError: () -> Unit, onResponse: () -> Unit) {
         val token = authHeader(context)
         val dao = UpdateCityDAO(city)
-        service.updateCity(token, dao).enqueue(object: Callback<UserDAO> {
+        service.updateCity(token, dao).enqueue(
+            generateUserCallback(onSuccess, onFailure, onNetworkError, onResponse)
+        )
+    }
+
+    private fun generateUserCallback(onSuccess: (user: User) -> Unit, onFailure: (error: ApiError) -> Unit, onNetworkError: () -> Unit, onResponse: () -> Unit): Callback<UserDAO> {
+        return object : Callback<UserDAO> {
             override fun onResponse(call: Call<UserDAO>, response: Response<UserDAO>) {
                 if(response.isSuccessful) {
                     onSuccess(response.body()!!.toUser())
                 } else {
-                    onFailure(userRetrofitErrorToApiError(response))
+                    val apiError: ApiError = Gson().fromJson(
+                        response.errorBody()!!.charStream(),
+                        ApiError::class.java
+                    )
+                    onFailure(apiError)
                 }
                 onResponse()
             }
@@ -71,14 +57,7 @@ object UserRepository: Repository() {
                 onNetworkError()
                 onResponse()
             }
-        })
-    }
-
-    private fun userRetrofitErrorToApiError(response: Response<UserDAO>): ApiError {
-        return Gson().fromJson(
-            response.errorBody()!!.charStream(),
-            ApiError::class.java
-        )
+        }
     }
 
     private fun authHeader(context: Context): String {
