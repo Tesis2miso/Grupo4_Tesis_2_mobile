@@ -24,11 +24,7 @@ object UserRepository: Repository() {
                 if(response.isSuccessful) {
                     onSuccess(response.body()!!.toUser())
                 } else {
-                    val apiError: ApiError = Gson().fromJson(
-                        response.errorBody()!!.charStream(),
-                        ApiError::class.java
-                    )
-                    onFailure(apiError)
+                    onFailure(userRetrofitErrorToApiError(response))
                 }
                 onResponse()
             }
@@ -46,11 +42,7 @@ object UserRepository: Repository() {
                 if(response.isSuccessful) {
                     onSuccess(response.body()!!.toUser())
                 } else {
-                    val apiError: ApiError = Gson().fromJson(
-                        response.errorBody()!!.charStream(),
-                        ApiError::class.java
-                    )
-                    onFailure(apiError)
+                    onFailure(userRetrofitErrorToApiError(response))
                 }
                 onResponse()
             }
@@ -70,11 +62,7 @@ object UserRepository: Repository() {
                 if(response.isSuccessful) {
                     onSuccess(response.body()!!.toUser())
                 } else {
-                    val apiError: ApiError = Gson().fromJson(
-                        response.errorBody()!!.charStream(),
-                        ApiError::class.java
-                    )
-                    onFailure(apiError)
+                    onFailure(userRetrofitErrorToApiError(response))
                 }
                 onResponse()
             }
@@ -84,6 +72,13 @@ object UserRepository: Repository() {
                 onResponse()
             }
         })
+    }
+
+    private fun userRetrofitErrorToApiError(response: Response<UserDAO>): ApiError {
+        return Gson().fromJson(
+            response.errorBody()!!.charStream(),
+            ApiError::class.java
+        )
     }
 
     private fun authHeader(context: Context): String {
