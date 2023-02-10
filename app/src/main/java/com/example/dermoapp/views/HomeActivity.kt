@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.example.dermoapp.R
 import com.example.dermoapp.databinding.ActivityHomeBinding
 import com.example.dermoapp.fragments.AccountFragment
@@ -78,8 +76,8 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    fun goToFragment(fragment: Fragment, title_resource_id: Int) {
-        supportActionBar?.title = resources.getString(title_resource_id)
+    fun goToFragment(fragment: Fragment, titleResourceId: Int) {
+        supportActionBar?.title = resources.getString(titleResourceId)
         selectedFragment = fragment
         supportFragmentManager.beginTransaction().replace(
             R.id.home_frame_layout, selectedFragment

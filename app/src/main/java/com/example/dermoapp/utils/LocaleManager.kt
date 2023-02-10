@@ -13,6 +13,7 @@ class LocaleManager(private val activity: Activity) {
         val ENGLISH: String = "en"
     }
 
+    @SuppressWarnings("deprecation")
     fun setLocale(languageCode: String) {
         val config: Configuration = activity.baseContext.resources.configuration
 
@@ -24,6 +25,7 @@ class LocaleManager(private val activity: Activity) {
         );
     }
 
+    @SuppressWarnings("deprecation")
     fun getCurrentLocale(): String {
         var locale: Locale
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
