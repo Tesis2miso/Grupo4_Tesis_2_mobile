@@ -1,6 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.DermoApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <!-- Base application theme. --><style name="Theme.DermoApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/light_blue</item>
         <item name="colorPrimaryVariant">@color/light_blue</item>
@@ -12,7 +11,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="bottomNavigationStyle">@style/BottomNavigationViewStyle</item>
     </style>
 
     <style name="Theme.DermoApp.NoActionBar">
@@ -23,10 +21,4 @@
     <style name="Theme.DermoApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.DermoApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
-        <item name="android:background">@color/light_blue</item>
-        <item name="itemTextColor">@color/bottom_navigation_bar</item>
-        <item name="itemIconTint">@color/bottom_navigation_bar</item>
-    </style>
 </resources>
