@@ -1,13 +1,15 @@
 package com.example.dermoapp.viewmodels
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.dermoapp.R
 import com.example.dermoapp.models.User
 import com.example.dermoapp.repositories.UserRepository
 
-
-class LoginViewModel(val application: Application): ViewModel() {
+class HomeViewModel(val application: Application): ViewModel() {
     private val _loading = MutableLiveData(false)
     val loading: LiveData<Boolean> get() = _loading
 
@@ -22,11 +24,11 @@ class LoginViewModel(val application: Application): ViewModel() {
         _errorMssg.value = null
     }
 
-    fun login(userLogin: User, onSuccess: (userLogin: User) -> Unit) {
+    fun updateCity(city: String, onSuccess: (user: User) -> Unit) {
         setLoading(true)
-        UserRepository.loginUser(userLogin, { user ->
+        UserRepository.updateCity(application, city, { user ->
             onSuccess(user)
-        }, { error -> _errorMssg.value = error.mssg
+        }, {error -> _errorMssg.value = error.mssg
         }, { _errorMssg.value = application.resources.getString(R.string.network_error)
         }, { setLoading(false)
         })
@@ -34,8 +36,8 @@ class LoginViewModel(val application: Application): ViewModel() {
 }
 
 @Suppress("UNCHECKED_CAST")
-class LoginViewModelFactory(private val application: Application): ViewModelProvider.Factory {
+class HomeViewModelFactory(private val application: Application): ViewModelProvider.Factory {
     override fun <T: ViewModel> create(modelClass: Class<T>): T {
-        return LoginViewModel(application) as T
+        return HomeViewModel(application) as T
     }
 }

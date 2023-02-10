@@ -2,8 +2,6 @@ package com.example.dermoapp.views
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.ScrollView
@@ -12,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.example.dermoapp.R
 import com.example.dermoapp.databinding.ActivityLoginBinding
-import com.example.dermoapp.models.UserLogin
+import com.example.dermoapp.models.User
 import com.example.dermoapp.utils.CapsUtil
 import com.example.dermoapp.utils.SharedPreferencesManager
 import com.example.dermoapp.viewmodels.LoginViewModel
@@ -98,10 +96,10 @@ class LoginActivity : AppCompatActivity() {
 
     private fun submitForm() {
         clearErrors()
-        var userLogin = UserLogin(
-            emailInput.text.toString(),
-            passwordInput.text.toString(),
-            null
+        var userLogin = User(
+            "", emailInput.text.toString(),
+             null, "","",
+            passwordInput.text.toString()
         )
         var error = false
 
@@ -122,7 +120,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun onUserLogged(userLogin: UserLogin) {
+    private fun onUserLogged(userLogin: User) {
+        SharedPreferencesManager(this).saveModelPreference(
+            SharedPreferencesManager.USER,
+            userLogin
+        )
         SharedPreferencesManager(this).saveStringPreference(
             SharedPreferencesManager.USER_TOKEN,
             userLogin.token!!

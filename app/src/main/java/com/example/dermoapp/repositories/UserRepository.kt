@@ -1,11 +1,12 @@
 package com.example.dermoapp.repositories
 
+import android.content.Context
+import com.example.dermoapp.daos.UpdateCityDAO
 import com.example.dermoapp.daos.UserDAO
-import com.example.dermoapp.daos.UserLoginDAO
 import com.example.dermoapp.models.User
-import com.example.dermoapp.models.UserLogin
 import com.example.dermoapp.restservices.UsersAPI
 import com.example.dermoapp.utils.ApiError
+import com.example.dermoapp.utils.SharedPreferencesManager
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,11 +40,11 @@ object UserRepository: Repository() {
         })
     }
 
-    fun loginUser(userLogin: UserLogin, onSuccess: (userLogin: UserLogin) -> Unit, onFailure: (error: ApiError) -> Unit, onNetworkError: () -> Unit, onResponse: () -> Unit) {
-        service.login(userLogin).enqueue(object: Callback<UserLoginDAO> {
-            override fun onResponse(call: Call<UserLoginDAO>, response: Response<UserLoginDAO>) {
+    fun loginUser(userLogin: User, onSuccess: (userLogin: User) -> Unit, onFailure: (error: ApiError) -> Unit, onNetworkError: () -> Unit, onResponse: () -> Unit) {
+        service.login(userLogin).enqueue(object: Callback<UserDAO> {
+            override fun onResponse(call: Call<UserDAO>, response: Response<UserDAO>) {
                 if(response.isSuccessful) {
-                    onSuccess(response.body()!!.toUserLogin())
+                    onSuccess(response.body()!!.toUser())
                 } else {
                     val apiError: ApiError = Gson().fromJson(
                         response.errorBody()!!.charStream(),
@@ -54,10 +55,41 @@ object UserRepository: Repository() {
                 onResponse()
             }
 
-            override fun onFailure(call: Call<UserLoginDAO>, t: Throwable) {
+            override fun onFailure(call: Call<UserDAO>, t: Throwable) {
                 onNetworkError()
                 onResponse()
             }
         })
+    }
+
+    fun updateCity(context: Context, city: String, onSuccess: (user: User) -> Unit, onFailure: (error: ApiError) -> Unit, onNetworkError: () -> Unit, onResponse: () -> Unit) {
+        val token = authHeader(context)
+        val dao = UpdateCityDAO(city)
+        service.updateCity(token, dao).enqueue(object: Callback<UserDAO> {
+            override fun onResponse(call: Call<UserDAO>, response: Response<UserDAO>) {
+                if(response.isSuccessful) {
+                    onSuccess(response.body()!!.toUser())
+                } else {
+                    val apiError: ApiError = Gson().fromJson(
+                        response.errorBody()!!.charStream(),
+                        ApiError::class.java
+                    )
+                    onFailure(apiError)
+                }
+                onResponse()
+            }
+
+            override fun onFailure(call: Call<UserDAO>, t: Throwable) {
+                onNetworkError()
+                onResponse()
+            }
+        })
+    }
+
+    private fun authHeader(context: Context): String {
+        val token = SharedPreferencesManager(context).getStringPreference(
+            SharedPreferencesManager.USER_TOKEN
+        )
+        return "Bearer $token"
     }
 }

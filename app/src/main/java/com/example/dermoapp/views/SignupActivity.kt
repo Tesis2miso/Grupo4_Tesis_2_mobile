@@ -216,6 +216,10 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun onUserRegistered(user: User) {
+        SharedPreferencesManager(this).saveModelPreference(
+            SharedPreferencesManager.USER,
+            user
+        )
         SharedPreferencesManager(this).saveStringPreference(
             SharedPreferencesManager.USER_TOKEN,
             user.token!!

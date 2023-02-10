@@ -1,5 +1,6 @@
 package com.example.dermoapp.models
 
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
@@ -12,4 +13,5 @@ class User(
     var phone: String,
     var password: String?,
     var token: String? = null
-) {}
+): Model {
+}
