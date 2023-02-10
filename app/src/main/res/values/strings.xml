@@ -24,4 +24,7 @@
     <string name="form_login_password">Contraseña</string>
     <string name="login_btn_login">Ingresar</string>
     <string name="btn_forgot_password">¿Olvidaste la contraseña?</string>
+    <string name="home_menu">Inicio</string>
+    <string name="account_menu">Cuenta</string>
+    <string name="config_menu">Configuracion</string>
 </resources>

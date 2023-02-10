@@ -25,4 +25,7 @@
     <string name="mayus_field">Mayus activated</string>
     <string name="hello_field">Hello</string>
     <string name="btn_forgot_password">Forgot your password?</string>
+    <string name="home_menu">Home</string>
+    <string name="account_menu">Account</string>
+    <string name="config_menu">Configuration</string>
 </resources>
