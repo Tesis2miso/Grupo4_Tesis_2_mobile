@@ -26,7 +26,14 @@
     <string name="btn_forgot_password">¿Olvidaste la contraseña?</string>
     <string name="home_menu">Inicio</string>
     <string name="account_menu">Cuenta</string>
-    <string name="config_menu">Configuracion</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="config_menu">Configuración</string>
+    <string name="configuration_fragment_title">Configuración</string>
+    <string name="account_fragment_title">Cuenta</string>
+    <string name="home_fragment_title">Inicio</string>
+    <string name="btn_update_configuration">Actualizar</string>
+    <string name="btn_sign_out">Cerrar sesión</string>
+    <string name="language">Idioma</string>
+    <string name="configuration_city">Ciudad</string>
+    <string name="spanish">Español</string>
+    <string name="english">Ingles</string>
 </resources>

@@ -28,4 +28,13 @@
     <string name="home_menu">Home</string>
     <string name="account_menu">Account</string>
     <string name="config_menu">Settings</string>
+    <string name="configuration_fragment_title">Configuration</string>
+    <string name="home_fragment_title">Home</string>
+    <string name="account_fragment_title">Account</string>
+    <string name="btn_update_configuration">Update</string>
+    <string name="btn_sign_out">Sign out</string>
+    <string name="language">Language</string>
+    <string name="configuration_city">City</string>
+    <string name="spanish">Spanish</string>
+    <string name="english">English</string>
 </resources>

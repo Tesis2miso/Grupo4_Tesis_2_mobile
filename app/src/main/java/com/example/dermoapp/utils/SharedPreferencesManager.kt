@@ -24,4 +24,13 @@ class SharedPreferencesManager(val context: Context) {
         editor.putString(key, value)
         editor.apply()
     }
+
+    fun deleteAllPreferences() {
+        val preferences: SharedPreferences = context.getSharedPreferences(
+            SharedPreferencesManager.PREFERENCES, Context.MODE_PRIVATE
+        )
+        val editor = preferences.edit()
+        editor.clear();
+        editor.apply();
+    }
 }

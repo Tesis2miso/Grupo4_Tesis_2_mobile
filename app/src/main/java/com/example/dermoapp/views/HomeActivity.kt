@@ -23,30 +23,29 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         homeMenu = binding.homeMenu
         homeMenu.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.home_menu_item -> {
-                    goToFragment(HomeFragment())
+                    goToFragment(HomeFragment.newInstance(), R.string.home_fragment_title)
                     true
                 }
                 R.id.account_menu_item -> {
-                    goToFragment(AccountFragment())
+                    goToFragment(AccountFragment.newInstance(), R.string.account_fragment_title)
                     true
                 }
                 R.id.config_menu_item -> {
-                    goToFragment(ConfigurationFragment())
+                    goToFragment(ConfigurationFragment.newInstance(), R.string.configuration_fragment_title)
                     true
                 }
                 else -> false
             }
         }
-        goToFragment(HomeFragment())
+        goToFragment(HomeFragment.newInstance(), R.string.home_fragment_title)
     }
 
-    fun goToFragment(fragment: Fragment) {
+    fun goToFragment(fragment: Fragment, title_resource_id: Int) {
+        supportActionBar?.title = resources.getString(title_resource_id)
         selectedFragment = fragment
         supportFragmentManager.beginTransaction().replace(
             R.id.home_frame_layout, selectedFragment

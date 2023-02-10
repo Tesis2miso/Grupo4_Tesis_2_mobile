@@ -1,59 +1,79 @@
 package com.example.dermoapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Button
 import com.example.dermoapp.R
+import com.example.dermoapp.databinding.FragmentConfigurationBinding
+import com.example.dermoapp.utils.SharedPreferencesManager
+import com.example.dermoapp.views.HomeActivity
+import com.example.dermoapp.views.MainActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ConfigurationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ConfigurationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    val cities = listOf(
+        "Bogotá", "Cali", "Medellin",
+        "Barranquilla", "Cartagena", "Bucaramanga",
+        "Pereira", "Manizales"
+    )
+    private lateinit var languages: List<String>
+    private var _binding: FragmentConfigurationBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var cityInput: AutoCompleteTextView
+    private lateinit var languageInput: AutoCompleteTextView
+    private lateinit var btnSignOut: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_configuration, container, false)
+        _binding = FragmentConfigurationBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        cityInput = binding.cityInput
+        val cityAdapter = ArrayAdapter(requireActivity().applicationContext, R.layout.input_list_item, cities)
+        cityInput.setAdapter(cityAdapter)
+
+        languages = listOf(
+            requireActivity().resources?.getString(R.string.spanish)!!,
+            requireActivity().resources?.getString(R.string.english)!!,
+        )
+        languageInput = binding.languageInput
+        val languageAdapter = ArrayAdapter(requireActivity().applicationContext, R.layout.input_list_item, languages)
+        languageInput.setAdapter(languageAdapter)
+
+        btnSignOut = binding.btnSignOut
+        btnSignOut.setOnClickListener {
+            SharedPreferencesManager(requireContext()).deleteAllPreferences()
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
+            requireActivity().finish()
+        }
+
+        return view
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {}
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ConfigurationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
             ConfigurationFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
                 }
             }
     }
