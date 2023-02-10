@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home_menu"
+        android:id="@+id/home_menu_item"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_home"
         android:title="@string/home_menu"/>
     <item
-        android:id="@+id/account_menu"
+        android:id="@+id/account_menu_item"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_account_circle"
         android:title="@string/account_menu"/>
     <item
-        android:id="@+id/config_menu"
+        android:id="@+id/config_menu_item"
         android:enabled="true"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/ic_settings"
         android:title="@string/config_menu"/>
 </menu>

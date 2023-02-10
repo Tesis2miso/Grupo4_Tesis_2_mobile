@@ -127,14 +127,8 @@ class LoginActivity : AppCompatActivity() {
             SharedPreferencesManager.USER_TOKEN,
             userLogin.token!!
         )
-        val email = emailInput.text.toString()
-        SharedPreferencesManager(this).saveStringPreference(
-            SharedPreferencesManager.USER_EMAIL,
-            email
-        )
 
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("user_email", email)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
         this.finish()
