@@ -216,16 +216,15 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun onUserRegistered(user: User) {
+        SharedPreferencesManager(this).saveModelPreference(
+            SharedPreferencesManager.USER,
+            user
+        )
         SharedPreferencesManager(this).saveStringPreference(
             SharedPreferencesManager.USER_TOKEN,
             user.token!!
         )
-        SharedPreferencesManager(this).saveStringPreference(
-            SharedPreferencesManager.USER_EMAIL,
-            user.email
-        )
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("user_email", user.email)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
         this.finish()

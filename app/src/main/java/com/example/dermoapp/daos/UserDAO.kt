@@ -11,7 +11,7 @@ data class UserDAO(
     @JsonProperty("city") var city: String,
     @JsonProperty("birth_day") var birthDay: String,
     @JsonProperty("token") var token: String,
-) {
+): DAO {
     fun toUser(): User {
         return User(
             name, email, birthDay,

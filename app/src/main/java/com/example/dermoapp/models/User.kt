@@ -12,4 +12,5 @@ class User(
     var phone: String,
     var password: String?,
     var token: String? = null
-) {}
+): Model {
+}

@@ -15,7 +15,6 @@
     <string name="signup_terms">Al continuar acepta los terminos y condiciones</string>
     <string name="empty_field">Campo no puede estar vacio</string>
     <string name="mayus_field">Mayusculas activas</string>
-    <string name="hello_field">Hola</string>
     <string name="password_confirmation_does_not_match">Confirmación de contraseña no coincide</string>
     <string name="network_error">Hubo un error, verifique su conexión por favor</string>
     <string name="ok">OK</string>
@@ -24,4 +23,16 @@
     <string name="form_login_password">Contraseña</string>
     <string name="login_btn_login">Ingresar</string>
     <string name="btn_forgot_password">¿Olvidaste la contraseña?</string>
+    <string name="home_menu">Inicio</string>
+    <string name="account_menu">Cuenta</string>
+    <string name="config_menu">Configuración</string>
+    <string name="configuration_fragment_title">Configuración</string>
+    <string name="account_fragment_title">Cuenta</string>
+    <string name="home_fragment_title">Inicio</string>
+    <string name="btn_update_configuration">Actualizar</string>
+    <string name="btn_sign_out">Cerrar sesión</string>
+    <string name="language">Idioma</string>
+    <string name="configuration_city">Ciudad</string>
+    <string name="spanish">Español</string>
+    <string name="english">Ingles</string>
 </resources>
