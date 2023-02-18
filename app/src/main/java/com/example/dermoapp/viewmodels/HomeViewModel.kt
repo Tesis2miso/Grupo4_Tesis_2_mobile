@@ -33,6 +33,16 @@ class HomeViewModel(val application: Application): ViewModel() {
         }, { setLoading(false)
         })
     }
+
+    fun updateUserDetail(user: User, onSuccess: (user: User) -> Unit) {
+        setLoading(true)
+        UserRepository.updateUserDetail(application, user, { user ->
+            onSuccess(user)
+        }, {error -> _errorMssg.value = error.mssg
+        }, { _errorMssg.value = application.resources.getString(R.string.network_error)
+        }, { setLoading(false)
+        })
+    }
 }
 
 @Suppress("UNCHECKED_CAST")

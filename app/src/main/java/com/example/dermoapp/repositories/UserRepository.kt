@@ -2,6 +2,7 @@ package com.example.dermoapp.repositories
 
 import android.content.Context
 import com.example.dermoapp.daos.UpdateCityDAO
+import com.example.dermoapp.daos.UpdateUserDAO
 import com.example.dermoapp.daos.UserDAO
 import com.example.dermoapp.models.User
 import com.example.dermoapp.restservices.UsersAPI
@@ -36,6 +37,15 @@ object UserRepository: Repository() {
         service.updateCity(token, dao).enqueue(
             generateUserCallback(onSuccess, onFailure, onNetworkError, onResponse)
         )
+    }
+
+    fun updateUserDetail(context: Context, user: User, onSuccess: (user: User) -> Unit, onFailure: (error: ApiError) -> Unit, onNetworkError: () -> Unit, onResponse: () -> Unit) {
+        val token = authHeader(context)
+        val dao = UpdateUserDAO(user.name, user.email, user.phone, user.city, user.birthDay)
+        service.updateUserDetail(user.id!!, token, dao).enqueue(
+            generateUserCallback(onSuccess, onFailure, onNetworkError, onResponse)
+        )
+
     }
 
     private fun generateUserCallback(onSuccess: (user: User) -> Unit, onFailure: (error: ApiError) -> Unit, onNetworkError: () -> Unit, onResponse: () -> Unit): Callback<UserDAO> {

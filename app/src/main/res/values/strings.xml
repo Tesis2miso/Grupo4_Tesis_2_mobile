@@ -35,4 +35,5 @@
     <string name="configuration_city">Ciudad</string>
     <string name="spanish">Español</string>
     <string name="english">Ingles</string>
+    <string name="btn_update_profile">Actualizar perfil</string>
 </resources>

@@ -11,6 +11,7 @@ class User(
     var city: String,
     var phone: String,
     var password: String?,
-    var token: String? = null
+    var token: String? = null,
+    var id: Int? = null
 ): Model {
 }
