@@ -82,12 +82,6 @@ class AccountFragment : Fragment() {
             datePicker.show(requireActivity().supportFragmentManager, "")
         }
 
-        (requireActivity() as HomeActivity).viewModel.errorMssg.observe(this) { mssg ->
-            if(mssg != null) {
-                openDialog(mssg)
-            }
-        }
-
         user = SharedPreferencesManager(requireContext()).getModelPreference(
             SharedPreferencesManager.USER, User::class.java
         ) as User
