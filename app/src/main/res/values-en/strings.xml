@@ -37,4 +37,11 @@
     <string name="spanish">Spanish</string>
     <string name="english">English</string>
     <string name="btn_update_profile">Update profile</string>
+    <string name="btn_create_new_consult">+ Create new consult</string>
+    <string name="home_title">My consults</string>
+    <string name="consult_item_title">Consult -</string>
+    <string name="dont_have_consults">You dont have consults at the moment</string>
+    <string name="pending_status">PENDING</string>
+    <string name="confirmed_status">CONFIRMED</string>
+    <string name="rejected_status">REJECTED</string>
 </resources>

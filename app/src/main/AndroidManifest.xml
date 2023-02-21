@@ -17,6 +17,9 @@
         tools:ignore="DataExtractionRules"
         tools:targetApi="s">
         <activity
+            android:name=".views.ConsultDetail"
+            android:exported="false" />
+        <activity
             android:name=".views.LoginActivity"
             android:exported="false" />
         <activity

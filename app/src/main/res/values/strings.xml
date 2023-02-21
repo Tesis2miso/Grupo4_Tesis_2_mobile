@@ -36,4 +36,11 @@
     <string name="spanish">Español</string>
     <string name="english">Ingles</string>
     <string name="btn_update_profile">Actualizar perfil</string>
+    <string name="btn_create_new_consult">+ Crear nueva consulta</string>
+    <string name="home_title">Mis consultas</string>
+    <string name="consult_item_title">Consulta -</string>
+    <string name="dont_have_consults">No tienes consultas en el momento</string>
+    <string name="pending_status">PENDIENTE</string>
+    <string name="confirmed_status">CONFIRMADO</string>
+    <string name="rejected_status">RECHAZADO</string>
 </resources>

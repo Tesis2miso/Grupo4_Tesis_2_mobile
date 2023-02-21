@@ -12,6 +12,7 @@ import android.widget.ScrollView
 import com.example.dermoapp.R
 import com.example.dermoapp.databinding.FragmentAccountBinding
 import com.example.dermoapp.models.User
+import com.example.dermoapp.utils.DateUtil
 import com.example.dermoapp.utils.SharedPreferencesManager
 import com.example.dermoapp.views.HomeActivity
 import com.google.android.material.datepicker.CalendarConstraints
@@ -75,7 +76,7 @@ class AccountFragment : Fragment() {
             val offsetFromUTC = timeZoneUTC.getOffset(Date().time) * -1
             val date = Date(selection + offsetFromUTC)
             selectedDate = date
-            birthdayInput.setText(dateToString(date))
+            birthdayInput.setText(DateUtil.dateToString(date))
         })
 
         birthdayInput.setOnClickListener {
@@ -90,8 +91,8 @@ class AccountFragment : Fragment() {
         emailInput.setText(user.email)
         phoneInput.setText(user.phone)
         cityInput.setText(user.city, false)
-        selectedDate = stringToDate(user.birthDay)
-        birthdayInput.setText(selectedDate?.let { dateToString(it) })
+        selectedDate = DateUtil.stringToDate(user.birthDay)
+        birthdayInput.setText(selectedDate?.let { DateUtil.dateToString(it) })
 
         return view
     }
@@ -104,16 +105,6 @@ class AccountFragment : Fragment() {
         return MaterialDatePicker.Builder.datePicker().apply {
             setCalendarConstraints(constraintsBuilder.build())
         }.build()
-    }
-
-    private fun dateToString(dateToFormat: Date): String {
-        val simpleFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-        return simpleFormat.format(dateToFormat)
-    }
-
-    private fun stringToDate(dateString: String?): Date? {
-        val simpleFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-        return dateString?.let { simpleFormat.parse(it) }
     }
 
     private fun clearErrors() {
@@ -130,7 +121,7 @@ class AccountFragment : Fragment() {
         val userLocal = User(
             nameInput.text.toString(),
             emailInput.text.toString(),
-            if(selectedDate == null) null else dateToString(selectedDate!!),
+            if(selectedDate == null) null else DateUtil.dateToString(selectedDate!!),
             cityInput.text.toString(),
             phoneInput.text.toString(),
             null,
