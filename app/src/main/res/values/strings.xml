@@ -43,4 +43,13 @@
     <string name="pending_status">PENDIENTE</string>
     <string name="confirmed_status">CONFIRMADO</string>
     <string name="rejected_status">RECHAZADO</string>
+    <string name="detail_injury_type">Tipo de lesión</string>
+    <string name="detail_injury_shape">Forma</string>
+    <string name="detail_injury_count">Número de lesiones</string>
+    <string name="detail_distribution">Distribución</string>
+    <string name="detail_color">Color</string>
+    <string name="detail_automatic">Diagnostico automatico</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="detail_diagnosis">Diagnostico</string>
 </resources>

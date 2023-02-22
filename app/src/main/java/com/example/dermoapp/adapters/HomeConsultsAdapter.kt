@@ -36,7 +36,9 @@ class HomeConsultsAdapter(var consults: List<Consult>) :
                 )
 
                 holder.itemView.setOnClickListener {
+                    val consultAsString: String = this.asGsonString()
                     val intent = Intent(holder.itemView.context, ConsultDetail::class.java)
+                    intent.putExtra(ConsultDetail.CONSULT_EXTRA, consultAsString)
                     holder.itemView.context.startActivity(intent)
                 }
             }

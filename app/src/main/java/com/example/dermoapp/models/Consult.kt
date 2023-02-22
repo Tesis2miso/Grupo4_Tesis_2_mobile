@@ -22,6 +22,9 @@ class Consult(
     var city: String,
     @SerializedName("status")
     var status: Int,
+    @SerializedName("diagnosis")
+    var diagnosis: String? = null,
+    var specialist: Specialist? = null,
     @SerializedName("specialist_id")
     var specialistId: Int? = null,
     var id: Int? = null

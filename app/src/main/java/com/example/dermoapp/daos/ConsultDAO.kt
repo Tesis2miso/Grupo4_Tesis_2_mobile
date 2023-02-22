@@ -25,14 +25,19 @@ data class ConsultDAO(
     var city: String,
     @JsonProperty("status")
     var status: Int,
+    @JsonProperty("diagnosis")
+    var diagnosis: String?,
     @JsonProperty("specialist_id")
     var specialist_id: Int?,
+    @JsonProperty("specialist")
+    var specialist: SpecialistDAO?,
 ) : DAO {
     fun toConsult(): Consult {
         return Consult(
             automatic, color, created_at, distribution,
             injuries_count, injury_type, photo_url, shape,
-            user_id, city, status, specialist_id, id
+            user_id, city, status, diagnosis, specialist?.toSpecialist(),
+            specialist_id, id
         )
     }
 }

@@ -36,8 +36,7 @@ class SharedPreferencesManager(val context: Context) {
             SharedPreferencesManager.PREFERENCES, Context.MODE_PRIVATE
         )
         val editor = preferences.edit()
-        val gson = Gson()
-        val json = gson.toJson(value)
+        val json = value.asGsonString()
         editor.putString(key, json)
         editor.apply()
     }
@@ -46,9 +45,8 @@ class SharedPreferencesManager(val context: Context) {
         val sharedPreference =  context.getSharedPreferences(
             SharedPreferencesManager.PREFERENCES, Context.MODE_PRIVATE
         )
-        val gson = Gson()
         val json: String = sharedPreference.getString(key, "")!!
-        return gson.fromJson(json, className) as Model
+        return Model.fromGsonString(json, className)
     }
 
     fun deleteAllPreferences() {

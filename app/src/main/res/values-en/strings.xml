@@ -44,4 +44,13 @@
     <string name="pending_status">PENDING</string>
     <string name="confirmed_status">CONFIRMED</string>
     <string name="rejected_status">REJECTED</string>
+    <string name="detail_injury_type">Injury type</string>
+    <string name="detail_injury_shape">Shape</string>
+    <string name="detail_injury_count">Number of injuries</string>
+    <string name="detail_distribution">Distribution</string>
+    <string name="detail_color">Color</string>
+    <string name="detail_automatic">Automatic diagnosis</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="detail_diagnosis">Diagnosis</string>
 </resources>

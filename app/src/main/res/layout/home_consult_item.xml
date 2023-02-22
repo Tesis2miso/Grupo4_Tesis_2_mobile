@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/consultImage"
-            android:text="Bogota"
             />
 
         <LinearLayout
@@ -62,7 +61,6 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@id/consultImage"
-                    android:text="2022/11/11"
                     />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -72,7 +70,6 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/consultImage"
-                android:text="CONFIRMADO"
                 />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
