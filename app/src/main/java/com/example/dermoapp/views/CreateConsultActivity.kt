@@ -7,12 +7,21 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dermoapp.R
 import com.example.dermoapp.daos.CreateConsultDAO
 import com.example.dermoapp.databinding.ActivityCreateConsultBinding
+import com.example.dermoapp.viewmodels.CreateConsultViewModel
+import com.example.dermoapp.viewmodels.CreateConsultViewModelFactory
+import com.example.dermoapp.viewmodels.HomeViewModel
+import com.example.dermoapp.viewmodels.HomeViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -31,6 +40,8 @@ class CreateConsultActivity : AppCompatActivity() {
     private lateinit var automatic: SwitchMaterial
     private var photoUrl: String? = null
     private lateinit var photoLayout: TextInputLayout
+    private lateinit var progressIndicator: CircularProgressIndicator
+    private lateinit var createForm: LinearLayout
     private var mStorageRef: StorageReference? = FirebaseStorage.getInstance().getReference();
     private var imagePickerActivityResult: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -44,13 +55,14 @@ class CreateConsultActivity : AppCompatActivity() {
                             .into(binding.photo)
                         photoUrl = it.toString()
                     }.addOnFailureListener {
-                        Log.e("Firebase", "Failed in downloading")
+                        openDialog(getString(R.string.upload_photo_error))
                     }
                 }.addOnFailureListener {
-                    Log.e("Firebase", "Image Upload fail")
+                    openDialog(getString(R.string.upload_photo_error))
                 }
             }
         }
+
     @SuppressLint("Range")
     private fun getFileName(context: Context, uri: Uri): String? {
         if (uri.scheme == "content") {
@@ -66,12 +78,17 @@ class CreateConsultActivity : AppCompatActivity() {
         return uri.path?.lastIndexOf('/')?.let { uri.path?.substring(it) }
     }
 
+    val viewModel: CreateConsultViewModel by viewModels {
+        CreateConsultViewModelFactory(application)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateConsultBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        progressIndicator = binding.progressIndicator
         injuryType = binding.injuryType
         shape = binding.shape
         injuryCount = binding.injuryCount
@@ -79,6 +96,7 @@ class CreateConsultActivity : AppCompatActivity() {
         color = binding.color
         automatic = binding.automatic
         photoLayout = binding.photoLayout
+        createForm = binding.createFrame
         binding.btnCreate.setOnClickListener {
             submitForm()
         }
@@ -86,6 +104,22 @@ class CreateConsultActivity : AppCompatActivity() {
             val galleryIntent = Intent(Intent.ACTION_PICK)
             galleryIntent.type = "image/*"
             imagePickerActivityResult.launch(galleryIntent)
+        }
+
+        viewModel.loading.observe(this) { loading ->
+            if (loading) {
+                progressIndicator.visibility = View.VISIBLE
+                createForm.visibility = View.GONE
+            } else {
+                progressIndicator.visibility = View.GONE
+                createForm.visibility = View.VISIBLE
+            }
+        }
+
+        viewModel.errorMssg.observe(this) { mssg ->
+            if (mssg != null) {
+                openDialog(mssg)
+            }
         }
     }
 
@@ -131,6 +165,12 @@ class CreateConsultActivity : AppCompatActivity() {
             photoLayout.error = getString(R.string.empty_field)
             error = true
         }
+
+        if (!error) {
+            viewModel.createConsult(consult, {
+                println("Hola")
+            })
+        }
     }
 
     private fun clearErrors() {
@@ -148,6 +188,17 @@ class CreateConsultActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        if (!viewModel.loading.value!!) {
+            super.onBackPressed()
+        }
+    }
+
+    private fun openDialog(mssg: String) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.error)
+            .setMessage(mssg)
+            .setNeutralButton(R.string.ok) { _, _ ->
+                viewModel.clearError()
+            }.show()
     }
 }

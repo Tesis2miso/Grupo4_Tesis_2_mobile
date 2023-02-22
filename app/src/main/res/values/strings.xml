@@ -54,4 +54,5 @@
     <string name="detail_diagnosis">Diagnostico</string>
     <string name="create">Crear</string>
     <string name="detail_photo">Foto</string>
+    <string name="upload_photo_error">Error obteniendo la foto</string>
 </resources>
