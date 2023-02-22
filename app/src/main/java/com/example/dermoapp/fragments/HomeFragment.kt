@@ -1,5 +1,6 @@
 package com.example.dermoapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,8 @@ import com.example.dermoapp.adapters.HomeConsultsAdapter
 import com.example.dermoapp.databinding.FragmentConfigurationBinding
 import com.example.dermoapp.databinding.FragmentHomeBinding
 import com.example.dermoapp.models.Consult
+import com.example.dermoapp.views.ConsultDetailActivity
+import com.example.dermoapp.views.CreateConsultActivity
 import com.example.dermoapp.views.HomeActivity
 
 class HomeFragment : Fragment() {
@@ -31,6 +34,11 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        binding.btnCreateConsult.setOnClickListener {
+            val intent = Intent(activity, CreateConsultActivity::class.java)
+            activity?.startActivity(intent)
+        }
 
         recyclerView = binding.homeConsultsList
         recyclerView.layoutManager = GridLayoutManager(

@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.view.View
 import com.example.dermoapp.R
 import com.example.dermoapp.databinding.ActivityConsultDetailBinding
-import com.example.dermoapp.databinding.ActivityLoginBinding
 import com.example.dermoapp.models.Consult
 import com.example.dermoapp.models.Model
 import com.squareup.picasso.Picasso
 
-class ConsultDetail : AppCompatActivity() {
+class ConsultDetailActivity : AppCompatActivity() {
     companion object {
         val CONSULT_EXTRA = "CONSULT_EXTRA"
     }
@@ -24,14 +23,9 @@ class ConsultDetail : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val consultAsTring = intent.getStringExtra(ConsultDetail.CONSULT_EXTRA)
+        val consultAsTring = intent.getStringExtra(ConsultDetailActivity.CONSULT_EXTRA)
         consult = Model.fromGsonString(consultAsTring!!, Consult::class.java) as Consult
         loadConsult()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed();
-        return super.onSupportNavigateUp()
     }
 
     fun loadConsult() {
@@ -66,6 +60,11 @@ class ConsultDetail : AppCompatActivity() {
         } else {
             binding.detailAutomatic.setText(getString(R.string.no))
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed();
+        return super.onSupportNavigateUp()
     }
 
     override fun onBackPressed() {
