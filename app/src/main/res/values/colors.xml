@@ -8,4 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_gray">#484848</color>
+    <color name="item_gray">#BAB5B5</color>
+
+    <color name="pending_status">#e1ad01</color>
+    <color name="confirmed_status">#0098b3</color>
+    <color name="rejected_status">#ff0000</color>
 </resources>

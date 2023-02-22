@@ -37,4 +37,23 @@
     <string name="spanish">Spanish</string>
     <string name="english">English</string>
     <string name="btn_update_profile">Update profile</string>
+    <string name="btn_create_new_consult">+ Create new consult</string>
+    <string name="home_title">My consults</string>
+    <string name="consult_item_title">Consult -</string>
+    <string name="dont_have_consults">You dont have consults at the moment</string>
+    <string name="pending_status">PENDING</string>
+    <string name="confirmed_status">CONFIRMED</string>
+    <string name="rejected_status">REJECTED</string>
+    <string name="detail_injury_type">Injury type</string>
+    <string name="detail_injury_shape">Shape</string>
+    <string name="detail_injury_count">Number of injuries</string>
+    <string name="detail_distribution">Distribution</string>
+    <string name="detail_color">Color</string>
+    <string name="detail_automatic">Automatic diagnosis</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="detail_diagnosis">Diagnosis</string>
+    <string name="create">Create</string>
+    <string name="detail_photo">Photo</string>
+    <string name="upload_photo_error">Error obtaining photo</string>
 </resources>

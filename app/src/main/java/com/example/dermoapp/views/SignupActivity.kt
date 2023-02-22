@@ -2,8 +2,6 @@ package com.example.dermoapp.views
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -16,6 +14,7 @@ import com.example.dermoapp.R
 import com.example.dermoapp.databinding.ActivitySignupBinding
 import com.example.dermoapp.models.User
 import com.example.dermoapp.utils.CapsUtil
+import com.example.dermoapp.utils.DateUtil
 import com.example.dermoapp.utils.SharedPreferencesManager
 import com.example.dermoapp.viewmodels.SignupViewModel
 import com.example.dermoapp.viewmodels.SignupViewModelFactory
@@ -27,7 +26,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -84,7 +82,7 @@ class SignupActivity : AppCompatActivity() {
             val offsetFromUTC = timeZoneUTC.getOffset(Date().time) * -1
             val date = Date(selection + offsetFromUTC)
             selectedDate = date
-            birthdayInput.setText(dateToSring(date))
+            birthdayInput.setText(DateUtil.dateToString(date))
         })
 
         birthdayInput.setOnClickListener {
@@ -162,17 +160,12 @@ class SignupActivity : AppCompatActivity() {
         passwordConfirmationInput.error = null
     }
 
-    private fun dateToSring(dateToFormat: Date): String {
-        val simpleFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-        return simpleFormat.format(dateToFormat)
-    }
-
     private fun submitForm() {
         clearErrors()
         var user = User(
             nameInput.text.toString(),
             emailInput.text.toString(),
-            if(selectedDate == null) null else dateToSring(selectedDate!!),
+            if(selectedDate == null) null else DateUtil.dateToString(selectedDate!!),
             cityInput.text.toString(),
             phoneInput.text.toString(),
             passwordInput.text.toString(),

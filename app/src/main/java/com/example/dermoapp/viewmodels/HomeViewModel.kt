@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.dermoapp.R
+import com.example.dermoapp.models.Consult
 import com.example.dermoapp.models.User
+import com.example.dermoapp.repositories.ConsultRepository
 import com.example.dermoapp.repositories.UserRepository
 
 class HomeViewModel(val application: Application): ViewModel() {
@@ -36,8 +38,18 @@ class HomeViewModel(val application: Application): ViewModel() {
 
     fun updateUserDetail(user: User, onSuccess: (user: User) -> Unit) {
         setLoading(true)
-        UserRepository.updateUserDetail(application, user, { user ->
-            onSuccess(user)
+        UserRepository.updateUserDetail(application, user, { responseUser ->
+            onSuccess(responseUser)
+        }, {error -> _errorMssg.value = error.mssg
+        }, { _errorMssg.value = application.resources.getString(R.string.network_error)
+        }, { setLoading(false)
+        })
+    }
+
+    fun loadConsults(onSuccess: (consults: List<Consult>) -> Unit) {
+        setLoading(true)
+        ConsultRepository.loadConsults(application, { consults ->
+            onSuccess(consults)
         }, {error -> _errorMssg.value = error.mssg
         }, { _errorMssg.value = application.resources.getString(R.string.network_error)
         }, { setLoading(false)
