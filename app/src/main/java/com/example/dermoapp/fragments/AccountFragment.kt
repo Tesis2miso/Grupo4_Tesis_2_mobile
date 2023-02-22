@@ -21,7 +21,6 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
-import java.text.SimpleDateFormat
 import java.util.*
 
 class AccountFragment : Fragment() {
@@ -161,16 +160,6 @@ class AccountFragment : Fragment() {
             SharedPreferencesManager.USER,
             user
         )
-    }
-
-    private fun openDialog(mssg: String) {
-        val activity: HomeActivity = requireActivity() as HomeActivity
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.error)
-            .setMessage(mssg)
-            .setNeutralButton(R.string.ok) { _, _ ->
-                activity.viewModel.clearError()
-            }.show()
     }
 
     companion object {

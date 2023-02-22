@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
@@ -18,8 +17,6 @@ import com.example.dermoapp.daos.CreateConsultDAO
 import com.example.dermoapp.databinding.ActivityCreateConsultBinding
 import com.example.dermoapp.viewmodels.CreateConsultViewModel
 import com.example.dermoapp.viewmodels.CreateConsultViewModelFactory
-import com.example.dermoapp.viewmodels.HomeViewModel
-import com.example.dermoapp.viewmodels.HomeViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.switchmaterial.SwitchMaterial
@@ -127,12 +124,12 @@ class CreateConsultActivity : AppCompatActivity() {
         clearErrors()
         var error = false
         val consult = CreateConsultDAO(
-            automatic.isSelected, color.text.toString(),
+            automatic.isChecked, color.text.toString(),
             distribution.text.toString(),
             if (injuryCount.text.toString()
                     .trim() != ""
             ) Integer.parseInt(injuryCount.text.toString()) else null,
-            injuryType.text.toString(), null,
+            injuryType.text.toString(), photoUrl,
             shape.text.toString()
         )
 
@@ -167,8 +164,8 @@ class CreateConsultActivity : AppCompatActivity() {
         }
 
         if (!error) {
-            viewModel.createConsult(consult, {
-                println("Hola")
+            viewModel.createConsult(consult,  onSuccess = {
+                this.finish()
             })
         }
     }

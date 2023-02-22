@@ -3,10 +3,6 @@ package com.example.dermoapp.utils
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.dermoapp.models.Model
-import com.google.gson.Gson
-
-
-
 
 class SharedPreferencesManager(val context: Context) {
     companion object {

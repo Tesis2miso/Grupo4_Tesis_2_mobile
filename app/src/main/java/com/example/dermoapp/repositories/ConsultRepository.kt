@@ -1,14 +1,9 @@
 package com.example.dermoapp.repositories
 
 import android.content.Context
-import com.example.dermoapp.daos.ConsultDAO
-import com.example.dermoapp.daos.UpdateCityDAO
-import com.example.dermoapp.daos.UpdateUserDAO
-import com.example.dermoapp.daos.UserDAO
+import com.example.dermoapp.daos.*
 import com.example.dermoapp.models.Consult
-import com.example.dermoapp.models.User
 import com.example.dermoapp.restservices.ConsultsAPI
-import com.example.dermoapp.restservices.UsersAPI
 import com.example.dermoapp.utils.ApiError
 import com.example.dermoapp.utils.SharedPreferencesManager
 import com.google.gson.Gson
@@ -51,6 +46,36 @@ object ConsultRepository : Repository() {
             }
 
             override fun onFailure(call: Call<List<ConsultDAO>>, t: Throwable) {
+                onNetworkError()
+                onResponse()
+            }
+        })
+    }
+
+    fun createConsult(
+        consult: CreateConsultDAO,
+        context: Context,
+        onSuccess: (consults: Consult) -> Unit,
+        onFailure: (error: ApiError) -> Unit,
+        onNetworkError: () -> Unit,
+        onResponse: () -> Unit
+    ) {
+        val token = authHeader(context)
+        service.create(token, consult).enqueue(object: Callback<ConsultDAO> {
+            override fun onResponse(call: Call<ConsultDAO>, response: Response<ConsultDAO>) {
+                if (response.isSuccessful) {
+                    onSuccess(response.body()!!.toConsult())
+                } else {
+                    val apiError: ApiError = Gson().fromJson(
+                        response.errorBody()!!.charStream(),
+                        ApiError::class.java
+                    )
+                    onFailure(apiError)
+                }
+                onResponse()
+            }
+
+            override fun onFailure(call: Call<ConsultDAO>, t: Throwable) {
                 onNetworkError()
                 onResponse()
             }

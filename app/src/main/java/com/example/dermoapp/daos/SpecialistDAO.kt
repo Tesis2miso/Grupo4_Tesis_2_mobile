@@ -1,9 +1,7 @@
 package com.example.dermoapp.daos
 
 import com.example.dermoapp.models.Specialist
-import com.example.dermoapp.models.User
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.google.gson.annotations.SerializedName
 
 data class SpecialistDAO(
     @JsonProperty("id") var id: Int,

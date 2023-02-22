@@ -1,7 +1,6 @@
 package com.example.dermoapp.daos
 
 import com.example.dermoapp.models.Consult
-import com.example.dermoapp.models.User
 import com.fasterxml.jackson.annotation.JsonProperty
 
 

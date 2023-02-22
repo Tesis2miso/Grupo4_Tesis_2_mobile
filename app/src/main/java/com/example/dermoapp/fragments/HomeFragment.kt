@@ -8,12 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dermoapp.R
 import com.example.dermoapp.adapters.HomeConsultsAdapter
-import com.example.dermoapp.databinding.FragmentConfigurationBinding
 import com.example.dermoapp.databinding.FragmentHomeBinding
 import com.example.dermoapp.models.Consult
-import com.example.dermoapp.views.ConsultDetailActivity
 import com.example.dermoapp.views.CreateConsultActivity
 import com.example.dermoapp.views.HomeActivity
 
@@ -49,6 +46,11 @@ class HomeFragment : Fragment() {
         loadConsults()
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadConsults()
     }
 
     fun loadConsults() {
