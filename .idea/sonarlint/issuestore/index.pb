@@ -19,5 +19,3 @@ l
 <app/src/main/java/com/example/dermoapp/views/HomeActivity.kt,8/2/821c904f96784a8c6abafa11ebe9a8c7dc40c2f8
 m
 =app/src/main/java/com/example/dermoapp/views/LoginActivity.kt,9/d/9df70ddf33134c2bcb503c598af23072fb062226
-u
-Eapp/src/main/java/com/example/dermoapp/views/ConsultDetailActivity.kt,1/3/13c806874de4b628f174c9b0b2b37aa50c95d45a

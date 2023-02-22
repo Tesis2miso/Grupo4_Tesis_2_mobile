@@ -93,6 +93,24 @@
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/photoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/detail_color"
+            app:errorEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/photo"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:srcCompat="@drawable/profile"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="20dp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/automatic"
             android:layout_width="match_parent"
