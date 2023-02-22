@@ -16,6 +16,7 @@ import com.example.dermoapp.R
 import com.example.dermoapp.databinding.ActivitySignupBinding
 import com.example.dermoapp.models.User
 import com.example.dermoapp.utils.CapsUtil
+import com.example.dermoapp.utils.DateUtil
 import com.example.dermoapp.utils.SharedPreferencesManager
 import com.example.dermoapp.viewmodels.SignupViewModel
 import com.example.dermoapp.viewmodels.SignupViewModelFactory
@@ -84,7 +85,7 @@ class SignupActivity : AppCompatActivity() {
             val offsetFromUTC = timeZoneUTC.getOffset(Date().time) * -1
             val date = Date(selection + offsetFromUTC)
             selectedDate = date
-            birthdayInput.setText(dateToSring(date))
+            birthdayInput.setText(DateUtil.dateToString(date))
         })
 
         birthdayInput.setOnClickListener {
@@ -162,17 +163,12 @@ class SignupActivity : AppCompatActivity() {
         passwordConfirmationInput.error = null
     }
 
-    private fun dateToSring(dateToFormat: Date): String {
-        val simpleFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-        return simpleFormat.format(dateToFormat)
-    }
-
     private fun submitForm() {
         clearErrors()
         var user = User(
             nameInput.text.toString(),
             emailInput.text.toString(),
-            if(selectedDate == null) null else dateToSring(selectedDate!!),
+            if(selectedDate == null) null else DateUtil.dateToString(selectedDate!!),
             cityInput.text.toString(),
             phoneInput.text.toString(),
             passwordInput.text.toString(),

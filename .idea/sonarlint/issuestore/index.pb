@@ -1,6 +1,4 @@
 
-u
-Eapp/src/main/java/com/example/dermoapp/repositories/UserRepository.kt,6/7/670fcac54f6723d4a26da183b12537cb2a92e5d0
 o
 ?app/src/main/java/com/example/dermoapp/restservices/UsersAPI.kt,8/f/8f236a38848a3a65c52e2e4d7a40a7662fdc970f
 r
@@ -13,14 +11,6 @@ l
 <app/src/main/java/com/example/dermoapp/daos/SpecialistDAO.kt,0/e/0ef8f37c87ef6d7a34bdd9fd2315f3d905fbb79c
 k
 ;app/src/main/java/com/example/dermoapp/models/Specialist.kt,c/5/c56a8071961ddafa090509cdaa293c789a04d763
-i
-9app/src/main/java/com/example/dermoapp/daos/ConsultDAO.kt,6/f/6ff3bac33d6f248a6fac80739edc151a35e61d39
-h
-8app/src/main/java/com/example/dermoapp/models/Consult.kt,0/e/0e15f962e760b90df32966de201d30cc75b3357f
-u
-Eapp/src/main/java/com/example/dermoapp/views/CreateConsultActivity.kt,d/a/da6cd6d5c91de066766ef3e561661ff82e3d4013
-e
-5app/src/main/java/com/example/dermoapp/models/User.kt,b/a/ba485086acc19d6775410bd227119d05b2652025
 v
 Fapp/src/main/java/com/example/dermoapp/adapters/HomeConsultsAdapter.kt,0/3/03e99af453269789b00d8c250a086ab548def05a
 p

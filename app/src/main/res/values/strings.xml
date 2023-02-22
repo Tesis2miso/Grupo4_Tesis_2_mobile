@@ -52,4 +52,5 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="detail_diagnosis">Diagnostico</string>
+    <string name="create">Crear</string>
 </resources>
