@@ -46,8 +46,7 @@ object ConsultRepository : Repository() {
             }
 
             override fun onFailure(call: Call<List<ConsultDAO>>, t: Throwable) {
-                onNetworkError()
-                onResponse()
+                onFailureConsult(onNetworkError, onResponse)
             }
         })
     }
@@ -63,21 +62,11 @@ object ConsultRepository : Repository() {
         val token = authHeader(context)
         service.create(token, consult).enqueue(object: Callback<ConsultDAO> {
             override fun onResponse(call: Call<ConsultDAO>, response: Response<ConsultDAO>) {
-                if (response.isSuccessful) {
-                    onSuccess(response.body()!!.toConsult())
-                } else {
-                    val apiError: ApiError = Gson().fromJson(
-                        response.errorBody()!!.charStream(),
-                        ApiError::class.java
-                    )
-                    onFailure(apiError)
-                }
-                onResponse()
+                onResponseConsult(response, onSuccess, onFailure, onResponse)
             }
 
             override fun onFailure(call: Call<ConsultDAO>, t: Throwable) {
-                onNetworkError()
-                onResponse()
+                onFailureConsult(onNetworkError, onResponse)
             }
         })
     }
@@ -95,23 +84,34 @@ object ConsultRepository : Repository() {
         val dao = UpdateStatusDAO(status)
         service.update(consultId, token, dao).enqueue(object: Callback<ConsultDAO> {
             override fun onResponse(call: Call<ConsultDAO>, response: Response<ConsultDAO>) {
-                if (response.isSuccessful) {
-                    onSuccess(response.body()!!.toConsult())
-                } else {
-                    val apiError: ApiError = Gson().fromJson(
-                        response.errorBody()!!.charStream(),
-                        ApiError::class.java
-                    )
-                    onFailure(apiError)
-                }
-                onResponse()
+                onResponseConsult(response, onSuccess, onFailure, onResponse)
             }
 
             override fun onFailure(call: Call<ConsultDAO>, t: Throwable) {
-                onNetworkError()
-                onResponse()
+                onFailureConsult(onNetworkError, onResponse)
             }
         })
+    }
+
+    private fun onResponseConsult(response: Response<ConsultDAO>,
+                                  onSuccess: (consults: Consult) -> Unit,
+                                  onFailure: (error: ApiError) -> Unit,
+                                  onResponse: () -> Unit){
+        if (response.isSuccessful) {
+            onSuccess(response.body()!!.toConsult())
+        } else {
+            val apiError: ApiError = Gson().fromJson(
+                response.errorBody()!!.charStream(),
+                ApiError::class.java
+            )
+            onFailure(apiError)
+        }
+        onResponse()
+    }
+
+    private fun onFailureConsult(onNetworkError: () -> Unit, onResponse: () -> Unit){
+        onNetworkError()
+        onResponse()
     }
 
     private fun authHeader(context: Context): String {
