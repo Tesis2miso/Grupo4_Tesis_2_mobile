@@ -55,4 +55,6 @@
     <string name="create">Crear</string>
     <string name="detail_photo">Foto</string>
     <string name="upload_photo_error">Error obteniendo la foto</string>
+    <string name="accept">Aceptar</string>
+    <string name="reject">Rechazar</string>
 </resources>
