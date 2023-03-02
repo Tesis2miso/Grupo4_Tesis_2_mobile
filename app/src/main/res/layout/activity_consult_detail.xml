@@ -203,5 +203,23 @@
                     />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnAccept"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="@string/accept"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/confirmed_status"
+            />
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btnReject"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="@string/reject"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/rejected_status"
+            />
     </LinearLayout>
 </ScrollView>
